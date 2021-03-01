@@ -49,9 +49,7 @@ class Paddle(BlockSprite):
     def decrese(self, drim):
         self.image = pygame.Surface((10, 150*(1-(drim/MAX_TIME))))
         self.image.fill(BLUE)
-        self.move(self.image.get_rect().y)
-        #------------------
-
+        self.rect.height = 150*(1-(drim/MAX_TIME))
 # --------------------------------------------------------
 
 class BallSprite(pygame.sprite.Sprite):
@@ -182,9 +180,6 @@ while running:
                 leftStep = 0
             if event.key == K_p or event.key == K_l:   # right paddle
                 rightStep = 0
-
-# leftPaddle = Paddle(50, scrHeight/2)
-# rightPaddle = Paddle(scrWidth-50, scrHeight/2)
 
     # update game
     if not gameOver:
