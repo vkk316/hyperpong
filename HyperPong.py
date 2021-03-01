@@ -1,6 +1,4 @@
-
 # pong.py
-
 
 import pygame, random
 from pygame.locals import *
@@ -50,7 +48,7 @@ class Paddle(BlockSprite):
         self.image = pygame.Surface((10, 150*(1-(drim/MAX_TIME))))
         self.image.fill(BLUE)
         self.rect.height = 150*(1-(drim/MAX_TIME))
-# --------------------------------------------------------
+    # --------------------------------------------------------
 
 class BallSprite(pygame.sprite.Sprite):
 
@@ -116,7 +114,7 @@ def centerImage(screen, im):
 # ---------- main -------------
 
 pygame.init()
-screen = pygame.display.set_mode([1280,720])
+screen = pygame.display.set_mode([1024,600])
 screen.fill(WHITE)
 pygame.display.set_caption("Pong")
 
@@ -186,9 +184,11 @@ while running:
         leftPaddle.move(leftStep)
         rightPaddle.move(rightStep)
         ball.update()
-        secs = int(pygame.time.get_ticks() / 1000) #-----
-        leftPaddle.decrese(secs) #------
+        #---------------------------------------------------------------------
+        secs = int(pygame.time.get_ticks() / 1000)
+        leftPaddle.decrese(secs)
         rightPaddle.decrese(secs)
+        #---------------------------------------------------------------------
 
         if scoreLeft >= WINNING_SCORE:
             winMsg = "Left Wins!"
@@ -196,7 +196,7 @@ while running:
         elif scoreRight >= WINNING_SCORE:
             winMsg = "Right Wins!"
             gameOver = True
-        #--------
+        #---------------------------------------------------------------------
         if secs == MAX_TIME:
             if scoreLeft > scoreRight:
                 winMsg = "Left Wins!"
@@ -207,17 +207,16 @@ while running:
             else:
                 winMsg = "Equality"
                 gameOver = True
-        #--------
+        #---------------------------------------------------------------------
 
 
     # redraw
     screen.fill(WHITE)                       
     sprites.draw(screen)
     
-    screen.blit( font.render(str(int(secs)) + " Seconds", True, RED), [1110, 20]) #------
+    screen.blit( font.render(str(int(secs)) + " Seconds", True, RED), [scrWidth-185, 20]) #------
     screen.blit( font.render(str(scoreLeft) + ":" + 
                              str(scoreRight), True, RED), [20, 20])
-    #--------------------------------------------------------------
 
     if gameOver:
         centerImage(screen, font.render(winMsg, True, RED))
