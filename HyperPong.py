@@ -31,11 +31,6 @@ class BlockSprite(pygame.sprite.Sprite):
         self.image.fill(color)
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
-    #--------
-    def decrese(self, drim):
-        self.image = pygame.Surface((10, 150*(1-(drim/MAX_TIME))))
-        self.image.fill(BLUE)
-# ---------------------------------------------------------
 
 class Paddle(BlockSprite):
     
@@ -50,7 +45,12 @@ class Paddle(BlockSprite):
             # at bottom and going down
             step = 0
         self.rect.y += step
-
+    #----------------------------------------------------
+    def decrese(self, drim):
+        self.image = pygame.Surface((10, 150*(1-(drim/MAX_TIME))))
+        self.image.fill(BLUE)
+        self.move(self.image.get_rect().y)
+        #------------------
 
 # --------------------------------------------------------
 
